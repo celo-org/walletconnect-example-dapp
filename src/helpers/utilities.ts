@@ -160,6 +160,32 @@ export function hashTypedDataMessage(msg: string): string {
   return ethUtil.bufferToHex(hash);
 }
 
+// export function recoverPublicKey(sig: string, hash: string): string {
+//   function parseSignatureAsVrs(signature: string) {
+//     let v: number = parseInt(signature.slice(0, 2), 16);
+//     const r: string = `0x${signature.slice(2, 66)}`;
+//     const s: string = `0x${signature.slice(66, 130)}`;
+//     console.log(v);
+//     if (v < 27) {
+//       v += 27;
+//     }
+//     return { v, r, s };
+//   }
+//   // todo: this is due to ContractKit / ethereumjs-util differencecs. ethutil-js
+//   // expects rvs but ContractKit gives back vrs
+//   const params = parseSignatureAsVrs(sig.slice(2));
+//   // const params = ethUtil.fromRpcSig(sig);
+//   const result = ethUtil.ecrecover(
+//     ethUtil.toBuffer(hash),
+//     params.v,
+//     Buffer.from(params.r.slice(2), "hex"),
+//     Buffer.from(params.s.slice(2), "hex"),
+//   );
+//   // end todo
+//   const signer = ethUtil.bufferToHex(ethUtil.publicToAddress(result));
+//   return signer;
+// }
+
 export function recoverAddress(sig: string, hash: string): string {
   const params = ethUtil.fromRpcSig(sig);
   const result = ethUtil.ecrecover(ethUtil.toBuffer(hash), params.v, params.r, params.s);

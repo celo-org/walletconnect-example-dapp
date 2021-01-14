@@ -177,4 +177,20 @@ export const SUPPORTED_CHAINS: IChainData[] = [
       balance: "",
     },
   },
+  {
+    name: "Celo Alfajores",
+    short_name: "celo",
+    chain: "celo",
+    network: "alfajores",
+    chain_id: 44787,
+    network_id: 1,
+    rpc_url: "https://clo-geth.0xinfra.com/",
+    native_currency: {
+      symbol: "CELO",
+      name: "CELO",
+      decimals: "18",
+      contractAddress: "",
+      balance: "",
+    },
+  },
 ];

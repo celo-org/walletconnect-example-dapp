@@ -11,14 +11,21 @@ import Modal from "./components/Modal";
 import Header from "./components/Header";
 import Loader from "./components/Loader";
 import { fonts } from "./styles";
-import { apiGetAccountAssets, apiGetGasPrices, apiGetAccountNonce } from "./helpers/api";
+import {
+  apiGetAccountAssets,
+  // apiGetGasPrices,
+  // apiGetAccountNonce
+} from "./helpers/api";
 import {
   sanitizeHex,
   verifySignature,
   hashTypedDataMessage,
   hashPersonalMessage,
 } from "./helpers/utilities";
-import { convertAmountToRawNumber, convertStringToHex } from "./helpers/bignumber";
+import {
+  // convertAmountToRawNumber,
+  convertStringToHex,
+} from "./helpers/bignumber";
 import { IAssetData } from "./helpers/types";
 import Banner from "./components/Banner";
 import AccountAssets from "./components/AccountAssets";
@@ -282,7 +289,7 @@ class App extends React.Component<any, any> {
   public toggleModal = () => this.setState({ showModal: !this.state.showModal });
 
   public testSendTransaction = async () => {
-    const { connector, address, chainId } = this.state;
+    const { connector, address /* chainId */ } = this.state;
 
     if (!connector) {
       return;
@@ -292,23 +299,23 @@ class App extends React.Component<any, any> {
     const from = address;
 
     // to
-    const to = address;
+    const to = "0x1998cAfD892179aE648c71F9107fc9cc6A156155"; // address;
 
     // nonce
-    const _nonce = await apiGetAccountNonce(address, chainId);
-    const nonce = sanitizeHex(convertStringToHex(_nonce));
+    // const _nonce = await apiGetAccountNonce(address, chainId);
+    // const nonce = sanitizeHex(convertStringToHex(_nonce));
 
     // gasPrice
-    const gasPrices = await apiGetGasPrices();
-    const _gasPrice = gasPrices.slow.price;
-    const gasPrice = sanitizeHex(convertStringToHex(convertAmountToRawNumber(_gasPrice, 9)));
+    // const gasPrices = await apiGetGasPrices();
+    // const _gasPrice = gasPrices.slow.price;
+    // const gasPrice = sanitizeHex(convertStringToHex(convertAmountToRawNumber(_gasPrice, 9)));
 
     // gasLimit
     const _gasLimit = 21000;
     const gasLimit = sanitizeHex(convertStringToHex(_gasLimit));
 
     // value
-    const _value = 0;
+    const _value = 1;
     const value = sanitizeHex(convertStringToHex(_value));
 
     // data
@@ -318,8 +325,8 @@ class App extends React.Component<any, any> {
     const tx = {
       from,
       to,
-      nonce,
-      gasPrice,
+      // nonce,
+      // gasPrice,
       gasLimit,
       value,
       data,
